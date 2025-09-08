@@ -10,7 +10,6 @@ git rev-parse --is-inside-work-tree >NUL 2>&1
 if errorlevel 1 (
   echo [錯誤] 這不是 Git 版本庫資料夾。
   pause
-  exit /b 1
 )
 
 REM 2) 取得目前分支名稱
@@ -24,7 +23,6 @@ git fetch --prune
 if errorlevel 1 (
   echo [錯誤] git fetch 失敗。
   pause
-  exit /b 1
 )
 
 REM 4) 檢查與遠端的差異（ ahead/behind ）
@@ -49,7 +47,6 @@ if defined BEHIND if not "!BEHIND!"=="0" (
     echo - 繼續 rebase：git rebase --continue
     echo - 或放棄 rebase：git rebase --abort
     pause
-    exit /b 1
   )
 )
 
@@ -92,7 +89,6 @@ if errorlevel 1 (
   echo [提示] 若再次被拒，通常是推送期間遠端又有新提交。
   echo        請再執行：git fetch ^&^& git pull --rebase origin %BRANCH% ^&^& git push
   pause
-  exit /b 1
 )
 
 echo.
